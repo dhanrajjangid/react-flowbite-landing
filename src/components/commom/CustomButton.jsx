@@ -4,7 +4,7 @@ import React from "react";
 const CustomButton = ({ children, onClick, className, background }) => {
   return (
     <Button
-      className={`${background} text-white rounded-none ${className}`}
+      className={`${background} rounded-none ${className}`}
       onClick={onClick}
     >
       {children}
