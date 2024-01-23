@@ -38,8 +38,13 @@ const HeroComponent = () => {
         </div>
 
         <div className="flex justify-center items-center mb-6">
-          {dropdownLabels.map((label) => (
-            <CustomDropdown key={label} label={label} icon="calendar" />
+          {dropdownLabels.map((label, index) => (
+            <CustomDropdown
+              className='border'
+              key={label}
+              label={label}
+              icon="calendar"
+            />
           ))}
 
           <CustomButton

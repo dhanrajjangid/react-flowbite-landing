@@ -3,7 +3,7 @@ import { Navbar } from "flowbite-react";
 import { navItems } from "@/constants/navItems";
 import { FiBell, FiSearch, FiUser } from "react-icons/fi"; // Assuming you have these icons available
 import CustomButton from "@/components/commom/CustomButton";
-
+import CustomDropdown from "@/components/commom/CustomDropdown";
 export default function Header() {
 
   return (
@@ -14,10 +14,20 @@ export default function Header() {
           className="mr-3 h-6 sm:h-9"
           alt="Flowbite React Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white border-r pr-4">
           Shop Digest
         </span>
       </Navbar.Brand>
+
+      <CustomDropdown
+        label="Platform"
+        icon="your-icon"
+        options={["Option 1", "Option 2", "Option 3"]}
+        // defaultSelectedIndex={0}
+        onChange={(selectedItem) => console.log("Selected Item:", selectedItem)}
+        className="your-custom-class"
+      />
+
       <div className="flex-grow flex items-center justify-center"> {/* Centered nav links */}
         <Navbar.Collapse>
           {navItems.map((item) => (
