@@ -24,35 +24,56 @@ const SubHeader = () => {
   };
 
   return (
-      <Navbar fluid>
-        <div className="mr-4">
-          <CustomDropdown
-            // label="Select Category"
-            icon="arrow-down"
-            className="border-r"
-            defaultSelectedIndex={0}
-            options={dropdownOptions.map((option) => option.label)}
-            onChange={handleDropdownChange} // Pass the handleDropdownChange function
-          />
-        </div>
+    <Navbar fluid>
+      <div className="mr-4">
+        <CustomDropdown
+          icon="arrow-down"
+          className="border-r"
+          defaultSelectedIndex={0}
+          options={dropdownOptions.map((option) => option.label)}
+          onChange={handleDropdownChange}
+        />
+      </div>
 
-        <nav className="flex justify-between">
-          {selectedCategory.items.map((item, index) => (
-            <a key={index} href="#" className="mr-4 hover:text-gray-400">
-              {item}
+      <nav className="flex flex-wrap items-center justify-between  mb-2 sm:mb-0 sm:flex-no-wrap">
+        {selectedCategory.items.slice(0, 1).map((item, index) => (
+          <a
+            key={index}
+            href="#"
+            className="mr-4 mb-2 sm:mb-0 hover:text-gray-400"
+          >
+            {item}
+          </a>
+        ))}
+        {selectedCategory.items.length > 2 && (
+          <div className="relative group">
+            <a href="#" className="mr-4 mb-2 sm:mb-0 hover:text-gray-400">
+              More
             </a>
-          ))}
-        </nav>
+            <div className="absolute hidden bg-white text-gray-800 rounded-md shadow-md z-10 group-hover:block right-0">
+              {selectedCategory.items.slice(2).map((item, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="block px-4 py-2 hover:bg-gray-200"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
 
-        <div className="border-l px-2">
-          <a href="#" className="mr-4 hover:text-gray-400">
-            Become a Zola vendor
-          </a>
-          <a href="#" className="hover:text-gray-400">
-            Shop Zola Home
-          </a>
-        </div>
-        </Navbar>
+      <div className="border-l px-2 mb-2 sm:mb-0 hidden sm:block">
+        <a href="#" className="mr-4 hover:text-gray-400">
+          Become a Zola vendor
+        </a>
+        <a href="#" className="hover:text-gray-400">
+          Shop Zola Home
+        </a>
+      </div>
+    </Navbar>
   );
 };
 

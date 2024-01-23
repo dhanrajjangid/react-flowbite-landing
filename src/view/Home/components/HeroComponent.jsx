@@ -9,12 +9,14 @@ const HeroComponent = () => {
   const handleButtonClick = (item) => {
     setActiveButton(item);
   };
+
   const dropdownLabels = [
     "Destinations",
     "Check in",
     "Check out",
     "Add guests",
   ];
+
   const popularLabels = ["Settings", "Phone", "Camera", "Calendar", "Messages"];
 
   return (
@@ -24,9 +26,10 @@ const HeroComponent = () => {
           Find the best Shopify apps
         </h2>
 
-        <div className="flex items-center justify-center space-x-4 mb-6">
+        <div className="flex flex-row items-center justify-center space-x-4 mb-6 sm:space-x-4">
           {["Apps", "Agencies", "Themes", "Services"].map((item) => (
             <Button
+              key={item}
               color="gray"
               className={` ${activeButton !== item ? "border-none" : ""}`}
               pill
@@ -37,11 +40,11 @@ const HeroComponent = () => {
           ))}
         </div>
 
-        <div className="flex justify-center items-center mb-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-0 mb-6 px-4 sm:px-0">
           {dropdownLabels.map((label, index) => (
             <CustomDropdown
-              className='border'
               key={label}
+              className="border mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto"
               label={label}
               icon="calendar"
             />
@@ -50,22 +53,19 @@ const HeroComponent = () => {
           <CustomButton
             background="bg-blue-500"
             onClick={() => console.log("Search button clicked")}
+            className="w-full sm:w-auto"
           >
             <i className="icon-search"></i> Search
           </CustomButton>
         </div>
 
-        {/* <hr className="divider my-6" /> */}
-
-        <div className="flex items-center justify-center space-x-4">
+        <div className="flex flex-wrap items-center justify-center space-y-4 sm:space-y-0 mb-6">
           <span className="text-gray-400">Popular Now:</span>
-          {popularLabels.map((item) => {
-            return (
-              <Button color="gray" className="px-1 py-0" pill>
-                {item}
-              </Button>
-            );
-          })}
+          {popularLabels.map((item) => (
+            <Button key={item} color="gray" className="px-1 py-0" pill>
+              {item}
+            </Button>
+          ))}
         </div>
       </div>
     </div>
