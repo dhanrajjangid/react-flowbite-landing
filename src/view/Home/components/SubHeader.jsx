@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomDropdown from "../../../components/commom/CustomDropdown";
 import { Navbar } from "flowbite-react";
 
@@ -15,6 +15,7 @@ const SubHeader = () => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState(dropdownOptions[0]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleDropdownChange = (selectedLabel) => {
     const selectedOption = dropdownOptions.find(
@@ -22,6 +23,22 @@ const SubHeader = () => {
     );
     setSelectedCategory(selectedOption || dropdownOptions[0]);
   };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the threshold as needed
+    };
+
+    checkMobile(); // Initial check
+
+    // Attach event listener for window resize
+    window.addEventListener("resize", checkMobile);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   return (
     <Navbar fluid>
@@ -35,17 +52,19 @@ const SubHeader = () => {
         />
       </div>
 
-      <nav className="flex flex-wrap items-center justify-between  mb-2 sm:mb-0 sm:flex-no-wrap">
-        {selectedCategory.items.slice(0, 1).map((item, index) => (
+      <nav className="flex flex-wrap items-center justify-between  mb-2 sm:mb-0">
+        {selectedCategory.items.map((item, index) => (
           <a
             key={index}
             href="#"
-            className="mr-4 mb-2 sm:mb-0 hover:text-gray-400"
+            className={`mr-4 sm:mb-0 hover:text-gray-400 ${
+              isMobile && index > 0 ? "hidden" : "" // Hide items after the first one on mobile
+            }`}
           >
             {item}
           </a>
         ))}
-        {selectedCategory.items.length > 2 && (
+        {selectedCategory.items.length > 2 && isMobile && (
           <div className="relative group">
             <a href="#" className="mr-4 mb-2 sm:mb-0 hover:text-gray-400">
               More
